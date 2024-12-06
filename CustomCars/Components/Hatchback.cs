@@ -18,5 +18,4 @@
             Description += "Crossover";
             Cost = 15000;
         }
-    }
 }

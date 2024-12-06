@@ -22,8 +22,9 @@
 
     public abstract class CarDecorator: Car
     {
-        public abstract string GetDescription();
-        public abstract string GetCost();
+        public abstract string Description { get; }
+
+        public abstract decimal Cost { get; }
     }
 }
 

@@ -1,6 +1,10 @@
-﻿<h4>Pick your base car type</h4>
+﻿
+<h3>Customise Your Dream Car</h3>
 
-<select name="carTypeOption" @bind="carType">
+<br />
+
+<p><strong>Pick your base car type: </strong></p>
+<select name="carTypeOptions" @bind="carType">
     @foreach (string car in Enum.GetNames(typeof(CarType)))
     {
         <option value="@car">@car</option>
@@ -9,8 +13,37 @@
 
 <br />
 <br />
-<button @onclick="ShowCurrentConfiguration">Show Current Configuration</button>
+
+<p><strong>Select your colour</strong></p>
+<select name="colourOptions" @bind="paintColour">
+    @foreach (string colour in Enum.GetNames(typeof(PaintColour)))
+    {
+        <option value="@colour">@colour</option>
+    }
+</select>
+
 <br />
+<br />
+
+<p><strong>Select your paint colour</strong></p>
+<select name="paintColourOptions" @bind="paintColour">
+    @foreach (string paintColour in Enum.GetNames(typeof(PaintColour)))
+    {
+        <option value="@paintColour">@paintColour</option>
+    }
+</select>
+
+<p><strong>Select your paint type</strong></p>
+<select name="paintTypeOptions" @bind="paintType">
+    @foreach (string paintType in Enum.GetNames(typeof(PaintType)))
+    {
+        <option value="@paintType">@paintType</option>
+    }
+</select>
+
+
+<br />
+<button @onclick="ShowCurrentConfiguration">Show Current Configuration</button>
 <br />
 
 <p>@carDetails</p>
@@ -18,6 +51,9 @@
 
 @code {
     private CarType carType = CarType.Hatchback;
+    private PaintColour paintColour = PaintColour.White;
+    private PaintType paintType = PaintType.Standard;
+
     //private List<Car> cars = new();
     private string carDetails;
     //private bool isButtonDisabled = false;
