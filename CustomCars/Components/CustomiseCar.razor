@@ -1,0 +1,43 @@
+﻿<h4>Pick your base car type</h4>
+
+<select name="carTypeOption" @bind="carType">
+    @foreach (string car in Enum.GetNames(typeof(CarType)))
+    {
+        <option value="@car">@car</option>
+    }
+</select>
+
+<br />
+<br />
+<button @onclick="ShowCurrentConfiguration">Show Current Configuration</button>
+<br />
+<br />
+
+<p>@carDetails</p>
+
+
+@code {
+    private CarType carType = CarType.Hatchback;
+    //private List<Car> cars = new();
+    private string carDetails;
+    //private bool isButtonDisabled = false;
+
+    private void ShowCurrentConfiguration()
+    {
+
+        Car newCar;
+
+        if (carType == CarType.Hatchback)
+        {
+            newCar = new Hatchback();
+        }
+        else
+        {
+            newCar = new Crossover();
+        }
+
+        //cars.Add(newCar);
+        carDetails = $"{newCar.Description} {newCar.Cost}";
+        //isButtonDisabled = true;
+    }
+}
