@@ -4,7 +4,7 @@
 <div class="container">
 
     <!-- Base Car Type -->
-    <div class ="card">
+    <div class="card">
         <h5>🚗 Choose Your Base Car</h5>
         <select name="carTypeOptions" @bind="carType">
             @foreach (string car in Enum.GetNames(typeof(CarType)))

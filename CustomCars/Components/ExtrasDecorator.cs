@@ -1,14 +1,8 @@
 ﻿namespace CustomCars.Components
 {
-    public class HeatedSeatsDecorator: CarDecorator
+    public class HeatedSeatsDecorator : CarDecorator
     {
-        public Car Car { get; set; }
-
-        public HeatedSeatsDecorator(Car car)
-        {
-            Car = car;
-            Description = GetDescription();
-        }
+        public HeatedSeatsDecorator(Car car) : base(car) { }
 
         public override decimal GetCost()
         {
@@ -23,13 +17,7 @@
 
     public class TouchScreenDecorator : CarDecorator
     {
-        public Car Car { get; set; }
-
-        public TouchScreenDecorator(Car car)
-        {
-            Car = car;
-            Description = GetDescription();
-        }
+        public TouchScreenDecorator(Car car) : base(car) { }
 
         public override decimal GetCost()
         {

@@ -7,15 +7,12 @@
         Hybrid,
         Electric
     }
-    public class PowertrainDecorator: CarDecorator
+    public class PowertrainDecorator : CarDecorator
     {
-        public Car Car { get; set; }
-
         public Powertrain Powertrain { get; set; }
 
-        public PowertrainDecorator(Car car, Powertrain powertrain)
+        public PowertrainDecorator(Car car, Powertrain powertrain) : base(car)
         {
-            Car = car;
             Powertrain = powertrain;
             Description = GetDescription();
         }

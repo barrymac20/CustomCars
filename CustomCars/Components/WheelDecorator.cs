@@ -13,17 +13,12 @@
         Alloy
     }
     public class WheelSizeDecorator : CarDecorator
-
     {
-        public Car Car { get; set; }
-
         public WheelSize WheelSize { get; set; }
 
-        public WheelSizeDecorator(Car car, WheelSize wheelSize)
+        public WheelSizeDecorator(Car car, WheelSize wheelSize) : base(car)
         {
-            Car = car;
             WheelSize = wheelSize;
-            Description = GetDescription();
         }
 
         public static decimal GetWheelSizeCost(WheelSize wheelSize)
@@ -70,17 +65,12 @@
     }
 
     public class WheelTypeDecorator : CarDecorator
-
     {
-        public Car Car { get; set; }
-
         public WheelType WheelType { get; set; }
 
-        public WheelTypeDecorator(Car car, WheelType wheelType)
+        public WheelTypeDecorator(Car car, WheelType wheelType): base(car)
         {
-            Car = car;
             WheelType = wheelType;
-            Description = GetDescription();
         }
 
         public static decimal GetWheelTypeCost(WheelType wheelType)

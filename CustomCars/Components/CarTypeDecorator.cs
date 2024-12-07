@@ -15,11 +15,9 @@
 
     public class CarTypeDecorator : CarDecorator
     {
-        public Car Car { get; set; }
         public CarType CarType { get; set; }
-        public CarTypeDecorator(Car car, CarType carType)
+        public CarTypeDecorator(Car car, CarType carType) : base(car)
         {
-            Car = car;
             CarType = carType;
             Description = GetDescription();
         }

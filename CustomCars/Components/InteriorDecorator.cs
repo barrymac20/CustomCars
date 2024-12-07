@@ -18,13 +18,10 @@
 
     public class InteriorColourDecorator : CarDecorator
     {
-        public Car Car { get; set; }
-
         public InteriorColour InteriorColour { get; set; }
 
-        public InteriorColourDecorator(Car car, InteriorColour interiorColour)
+        public InteriorColourDecorator(Car car, InteriorColour interiorColour) : base(car)
         {
-            Car = car;
             InteriorColour = interiorColour;
             Description = GetDescription();
         }
@@ -54,12 +51,10 @@
 
     public class InteriorMaterialDecorator : CarDecorator
     {
-        public Car Car { get; set; }
         public InteriorMaterial InteriorMaterial { get; set; }
 
-        public InteriorMaterialDecorator(Car car, InteriorMaterial interiorMaterial)
+        public InteriorMaterialDecorator(Car car, InteriorMaterial interiorMaterial) : base(car)
         {
-            Car = car;
             InteriorMaterial = interiorMaterial;
             Description = GetDescription();
         }

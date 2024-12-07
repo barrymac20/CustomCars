@@ -16,13 +16,11 @@
 
     public class PaintColourDecorator : CarDecorator
     {
-        public Car Car { get; set; }
 
         public PaintColour PaintColour { get; set; }
 
-        public PaintColourDecorator(Car car, PaintColour paintColour)
+        public PaintColourDecorator(Car car, PaintColour paintColour) : base(car)
         {
-            Car = car;
             PaintColour = paintColour;
             Description = GetDescription();
         }
@@ -52,12 +50,10 @@
 
     public class PaintTypeDecorator : CarDecorator
     {
-        public Car Car { get; set; }
         public PaintFinish PaintFinish { get; set; }
 
-        public PaintTypeDecorator(Car car, PaintFinish paintFinish)
+        public PaintTypeDecorator(Car car, PaintFinish paintFinish) : base(car)
         {
-            Car = car;
             PaintFinish = paintFinish;
             Description = GetDescription();
         }

@@ -4,7 +4,11 @@
     {
         public BaseCar()
         {
-            Description += "Car configuration: "; 
+            Description = GetDescription();
+        }
+        public override string GetDescription()
+        {
+            return $"Car configuration: ";
         }
 
         public override decimal GetCost()
