@@ -14,42 +14,34 @@
 <br />
 <br />
 
-<p><strong>Select paint colour</strong></p>
-<select name="PaintColourOptions" @bind="paintColour">
-    @foreach (string colour in Enum.GetNames(typeof(PaintColour)))
-    {
-        <option value="@colour">@colour</option>
-    }
-</select>
+<div style="background-color: red">
+
+    <p><strong>Select paint colour</strong></p>
+    <select name="paintColourOptions" @bind="paintColour">
+        @foreach (string colour in Enum.GetNames(typeof(PaintColour)))
+        {
+            <option value="@colour">@colour</option>
+        }
+    </select>
+
+    <br />
+    <br />
+
+    <p><strong>Select paint finish</strong></p>
+    <select name="paintFinishOptions" @bind="paintFinish">
+        @foreach (string paintFinish in Enum.GetNames(typeof(PaintFinish)))
+        {
+            <option value="@paintFinish">@paintFinish</option>
+        }
+    </select>
+</div>
 
 <br />
 <br />
 
-<p><strong>Select paint finish</strong></p>
-<select name="paintFinishOptions" @bind="paintFinish">
-    @foreach (string paintFinish in Enum.GetNames(typeof(PaintFinish)))
-    {
-        <option value="@paintFinish">@paintFinish</option>
-    }
-</select>
-
-<br />
-<br />
-<!--
+<div style="background-color: lightblue">
 <p><strong>Select wheel size</strong></p>
-<select name="WheelSizeOptions" @bind="wheelSize">
-    @foreach (WheelSize wheelSize in Enum.GetValues(typeof(WheelSize)))
-    {
-        <option value="@wheelSize">@((int)wheelSize)"</option>
-    }
-</select>
-
-<br />
-<br />
--->
-
-<p><strong>Select wheel size</strong></p>
-<select name="WheelSizeOptions" @bind="wheelSize">
+<select name="wheelSizeOptions" @bind="wheelSize">
     @foreach (string wheelSize in Enum.GetNames(typeof(WheelSize)))
     {
         <option value="@wheelSize">@(wheelSize)</option>
@@ -66,9 +58,32 @@
         <option value="@wheelType">@wheelType</option>
     }
 </select>
+</div>
 
 <br />
 <br />
+
+<div style="background-color: pink">
+
+    <p><strong>Select interior colour</strong></p>
+    <select name="interiorColourOptions" @bind="interiorColour">
+        @foreach (string interiorColour in Enum.GetNames(typeof(InteriorColour)))
+        {
+            <option value="@interiorColour">@interiorColour</option>
+        }
+    </select>
+
+    <br />
+    <br />
+
+    <p><strong>Select interior material</strong></p>
+    <select name="interiorMaterialOptions" @bind="interiorMaterial">
+        @foreach (string interiorMaterial in Enum.GetNames(typeof(InteriorMaterial)))
+        {
+            <option value="@interiorMaterial">@interiorMaterial</option>
+        }
+    </select>
+</div>
 
 <br />
 <button @onclick="ShowCurrentConfiguration">Show Current Configuration</button>
@@ -76,12 +91,44 @@
 <br />
 <p>@carDetails</p>
 
+<!--
+<table class="table">
+    <thead>
+        <tr>
+            <th>Property</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Car Type</td>
+            <td>@carType</td>
+        </tr>
+        <tr>
+            <td>Paint Colour</td>
+            <td>@paintColour</td>
+        </tr>
+        <tr>
+            <td>Paint Finish</td>
+            <td>@paintFinish</td>
+        </tr>
+        <tr>
+            <td>Wheel Size</td>
+            <td>@wheelSize</td>
+        </tr>
+    </tbody>
+</table>
+-->
+
 @code {
     private CarType carType = CarType.Hatchback;
-    private PaintColour paintColour = PaintColour.White;
+    private PaintColour paintColour = PaintColour.Red;
     private PaintFinish paintFinish = PaintFinish.Matte;
     private WheelSize wheelSize = WheelSize.SeventeenInch;
-    private WheelType wheelType;
+    private WheelType wheelType = WheelType.Steel;
+    private InteriorColour interiorColour = InteriorColour.Black;
+    private InteriorMaterial interiorMaterial = InteriorMaterial.Cloth;
+
 
     private string? carDetails;
 
@@ -103,7 +150,10 @@
         newCar = new PaintTypeDecorator(newCar, paintFinish);
         newCar = new WheelSizeDecorator(newCar, wheelSize);
         newCar = new WheelTypeDecorator(newCar, wheelType);
+        newCar = new InteriorColourDecorator(newCar, interiorColour);
+        newCar = new InteriorMaterialDecorator(newCar, interiorMaterial);
 
-        carDetails = $"{newCar.Description}. \nCost: {newCar.GetCost()}";
+
+        carDetails = $"{newCar.Description}. \nCost: €{newCar.GetCost()}";
     }
 }

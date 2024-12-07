@@ -2,16 +2,16 @@
 {
     public enum PaintColour
     {
-        Red = 0,
-        White = 0,
-        Blue = 0,
-        Black = 500
+        Red,
+        White,
+        Blue,
+        Black
     }
 
     public enum PaintFinish
     {
-        Matte = 0, 
-        Metallic = 2000
+        Matte,
+        Metallic
     }
 
     public class PaintColourDecorator : CarDecorator
@@ -29,7 +29,19 @@
 
         public override decimal GetCost()
         {
-            return Car.GetCost() + (Decimal)PaintColour;
+            return Car.GetCost() + GetPaintColourCost(PaintColour);
+        }
+
+        public static decimal GetPaintColourCost(PaintColour paintColour)
+        {
+            return paintColour switch
+            {
+                PaintColour.Red => 0,
+                PaintColour.White => 0,
+                PaintColour.Blue => 0,
+                PaintColour.Black => 500,
+                _ => 0
+            };
         }
 
         public override string GetDescription()
@@ -50,9 +62,19 @@
             Description = GetDescription();
         }
 
+        public static decimal GetPaintFinishCost(PaintFinish paintFinish)
+        {
+            return paintFinish switch
+            {
+                PaintFinish.Matte => 0,
+                PaintFinish.Metallic => 2000,
+                _ => 0
+            };
+        }
+
         public override decimal GetCost()
         {
-            return Car.GetCost() + (Decimal)PaintFinish;
+            return Car.GetCost() + GetPaintFinishCost(PaintFinish);
         }
 
         public override string GetDescription()

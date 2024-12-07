@@ -2,15 +2,15 @@
 {
     public enum WheelSize
     {
-        SeventeenInch = 0,
-        NineteenInch = 400,
-        TwentyOneInch = 800
+        SeventeenInch,
+        NineteenInch,
+        TwentyOneInch
     }
 
     public enum WheelType
     {
-        Steel = 0,
-        Alloy = 2000
+        Steel,
+        Alloy
     }
     public class WheelSizeDecorator : CarDecorator
 
@@ -26,9 +26,20 @@
             Description = GetDescription();
         }
 
+        public static decimal GetWheelSizeCost(WheelSize wheelSize)
+        {
+            return wheelSize switch
+            {
+                WheelSize.SeventeenInch => 0,
+                WheelSize.NineteenInch => 400,
+                WheelSize.TwentyOneInch => 800,
+                _ => 0
+            };
+        }
+
         public override decimal GetCost()
         {
-            return Car.GetCost() + (Decimal)WheelSize;
+            return Car.GetCost() + GetWheelSizeCost(WheelSize);
         }
 
         public int GetWheelSize(WheelSize wheelSize)
@@ -72,9 +83,19 @@
             Description = GetDescription();
         }
 
+        public static decimal GetWheelTypeCost(WheelType wheelType)
+        {
+            return wheelType switch
+            {
+                WheelType.Steel => 0,
+                WheelType.Alloy => 2000,
+                _ => 0
+            };
+        }
+
         public override decimal GetCost()
         {
-            return Car.GetCost() + (Decimal)WheelType;
+            return Car.GetCost() + GetWheelTypeCost(WheelType);
 
         }
 
