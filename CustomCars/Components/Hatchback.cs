@@ -6,7 +6,11 @@
         {
             CarType = CarType.Hatchback;
             Description += "Hatchback";
-            Cost = 10000;
+        }
+
+        public override decimal GetCost()
+        {
+            return 10000;
         }
     }
 
@@ -16,6 +20,11 @@
         {
             CarType = CarType.Crossover;
             Description += "Crossover";
-            Cost = 15000;
         }
+
+        public override decimal GetCost()
+        {
+            return 15000;
+        }
+    }
 }

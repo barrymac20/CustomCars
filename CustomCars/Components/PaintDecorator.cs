@@ -5,59 +5,66 @@
         Red, White, Blue, Black
     }
 
-    public enum PaintType
+    public enum PaintFinish
     {
-        Standard, Metallic
+        Matte, Metallic
     }
 
-    public abstract class PaintTypeDecorator : CarDecorator
+    public class PaintColourDecorator : CarDecorator
     {
-        public PaintColour PaintColour { get; set; }
-        public PaintType PaintType { get; set; } = PaintType.Standard;
+        public Car Car { get; set; }
 
-        public PaintTypeDecorator(Car car, PaintType paintType)
-        {
-            PaintType = paintType;
-            Description = car.Description;
-            Cost = GetPaintTypeCost();
-        }
-
-        public override string Description { get; }
-
-        public override decimal Cost { get; }
-
-        private decimal GetPaintTypeCost()
-        {
-            if (PaintType == PaintType.Metallic)
-                return 1500;
-            else if (PaintType == PaintType.Standard)
-                return 1200;
-            return 1000;
-        }
-    }
-
-    public abstract class PaintColourDecorator : CarDecorator
-    {
         public PaintColour PaintColour { get; set; }
 
         public PaintColourDecorator(Car car, PaintColour paintColour)
         {
-            Description = car.Description;
-            Cost = GetPaintColourCost();
+            Car = car;
+            PaintColour = paintColour;
+            Description = GetDescription();
         }
 
-        public override string Description { get; }
-
-        public override decimal Cost { get; }
-
-        private decimal GetPaintColourCost()
+        public override decimal GetCost()
         {
             if (PaintColour == PaintColour.Black)
-                return 200;
+                return Car.GetCost() + 200;
             else
-                return 0;
+                return Car.GetCost();
+        }
+
+        public override string GetDescription()
+        {
+            return $"{Car.Description} with {PaintColour.ToString().ToLower()}";
         }
     }
+
+    public class PaintTypeDecorator : CarDecorator
+    {
+        public Car Car { get; set; }
+        public PaintFinish PaintFinish { get; set; }
+
+        public PaintTypeDecorator(Car car, PaintFinish paintFinish)
+        {
+            Car = car;
+            PaintFinish = paintFinish;
+            Description = GetDescription();
+        }
+
+        public override decimal GetCost()
+        {
+            if (PaintFinish == PaintFinish.Metallic)
+                return Car.GetCost() + 1500;
+            else if (PaintFinish == PaintFinish.Matte)
+                return Car.GetCost();
+            return Car.GetCost();
+        }
+
+        public override string GetDescription()
+        {
+            return $"{Car.Description} {PaintFinish.ToString().ToLower()} paint";
+        }
+    }
+
+
 }
 
 

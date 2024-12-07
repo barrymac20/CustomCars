@@ -3,7 +3,7 @@
 
 <br />
 
-<p><strong>Pick your base car type: </strong></p>
+<p><strong>Pick base car type: </strong></p>
 <select name="carTypeOptions" @bind="carType">
     @foreach (string car in Enum.GetNames(typeof(CarType)))
     {
@@ -14,8 +14,8 @@
 <br />
 <br />
 
-<p><strong>Select your colour</strong></p>
-<select name="colourOptions" @bind="paintColour">
+<p><strong>Select paint colour</strong></p>
+<select name="PaintColourOptions" @bind="paintColour">
     @foreach (string colour in Enum.GetNames(typeof(PaintColour)))
     {
         <option value="@colour">@colour</option>
@@ -25,38 +25,53 @@
 <br />
 <br />
 
-<p><strong>Select your paint colour</strong></p>
-<select name="paintColourOptions" @bind="paintColour">
-    @foreach (string paintColour in Enum.GetNames(typeof(PaintColour)))
+<p><strong>Select paint finish</strong></p>
+<select name="paintFinishOptions" @bind="paintFinish">
+    @foreach (string paintFinish in Enum.GetNames(typeof(PaintFinish)))
     {
-        <option value="@paintColour">@paintColour</option>
+        <option value="@paintFinish">@paintFinish</option>
     }
 </select>
 
-<p><strong>Select your paint type</strong></p>
-<select name="paintTypeOptions" @bind="paintType">
-    @foreach (string paintType in Enum.GetNames(typeof(PaintType)))
+<br />
+<br />
+
+<p><strong>Select wheel size</strong></p>
+<select name="WheelSizeOptions" @bind="wheelSize">
+    @foreach (WheelSize wheelSize in Enum.GetValues(typeof(WheelSize)))
     {
-        <option value="@paintType">@paintType</option>
+        <option value="@wheelSize">@((int)wheelSize)"</option>
     }
 </select>
 
+<br />
+<br />
+
+<p><strong>Select wheel type</strong></p>
+<select name="wheelTypeOptions" @bind="wheelType">
+    @foreach (string wheelType in Enum.GetNames(typeof(WheelType)))
+    {
+        <option value="@wheelType">@wheelType</option>
+    }
+</select>
+
+<br />
+<br />
 
 <br />
 <button @onclick="ShowCurrentConfiguration">Show Current Configuration</button>
 <br />
-
+<br />
 <p>@carDetails</p>
-
 
 @code {
     private CarType carType = CarType.Hatchback;
     private PaintColour paintColour = PaintColour.White;
-    private PaintType paintType = PaintType.Standard;
+    private PaintFinish paintFinish = PaintFinish.Matte;
+    private WheelSize wheelSize = WheelSize.SeventeenInch;
+    private WheelType wheelType;
 
-    //private List<Car> cars = new();
-    private string carDetails;
-    //private bool isButtonDisabled = false;
+    private string? carDetails;
 
     private void ShowCurrentConfiguration()
     {
@@ -72,8 +87,11 @@
             newCar = new Crossover();
         }
 
-        //cars.Add(newCar);
-        carDetails = $"{newCar.Description} {newCar.Cost}";
-        //isButtonDisabled = true;
+        newCar = new PaintColourDecorator(newCar, paintColour);
+        newCar = new PaintTypeDecorator(newCar, paintFinish);
+        newCar = new WheelSizeDecorator(newCar, wheelSize);
+        newCar = new WheelTypeDecorator(newCar, wheelType);
+
+        carDetails = $"{newCar.Description}. \nCost: {newCar.GetCost()}";
     }
 }

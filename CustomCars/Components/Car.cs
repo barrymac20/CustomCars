@@ -16,16 +16,13 @@
     {
         // Methods
         public CarType CarType { get; set; }
-        public string Description { get; set; } = "Car: ";
-        public decimal Cost { get; set; }
+        public string Description { get; set; } = "Current configuration: ";
+
+        public abstract decimal GetCost();
     }
 
-    public abstract class CarDecorator: Car
+    public abstract class CarDecorator : Car
     {
-        public abstract string Description { get; }
-
-        public abstract decimal Cost { get; }
+        public abstract string GetDescription();
     }
 }
-
-
