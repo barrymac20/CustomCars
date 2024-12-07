@@ -1,21 +1,11 @@
 ﻿namespace CustomCars.Components
 {
-    public enum CarType
-    {
-        Hatchback,
-        Crossover,
-        Saloon,
-        Convertible,
-        SUV,
-        Pickup,
-        MPV,
-        Estate
-    }
+    
+
     public abstract class Car
     {
         // Methods
-        public CarType CarType { get; set; }
-        public string Description { get; set; } = "Current configuration: ";
+        public string Description { get; set; }
 
         public abstract decimal GetCost();
     }

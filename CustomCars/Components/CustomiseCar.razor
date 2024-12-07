@@ -114,9 +114,9 @@
 
     <!-- Preview and Confirm -->
     <div class="preview-card">
-        <h5>🚘 Your Configuration</h5>
+        <h5>🚘 Your Car</h5>
         <p>@carDetails</p>
-        <button @onclick="ShowCurrentConfiguration">Show Configuration</button>
+        <button @onclick="UpdateConfiguration">Update Configuration</button>
     </div>
 
 </div>
@@ -164,19 +164,16 @@
 
     private string? carDetails;
 
-    private void ShowCurrentConfiguration()
+    protected override void OnInitialized()
     {
-        Car newCar;
+        UpdateConfiguration(); // Show configuration as soon as the page loads
+    }
 
-        if (carType == CarType.Hatchback)
-        {
-            newCar = new Hatchback();
-        }
-        else
-        {
-            newCar = new Crossover();
-        }
+    private void UpdateConfiguration()
+    {
+        Car newCar = new BaseCar();
 
+        newCar = new CarTypeDecorator(newCar, carType);
         newCar = new PowertrainDecorator(newCar, powertrain);
         newCar = new PaintColourDecorator(newCar, paintColour);
         newCar = new PaintTypeDecorator(newCar, paintFinish);
@@ -185,11 +182,11 @@
         newCar = new InteriorColourDecorator(newCar, interiorColour);
         newCar = new InteriorMaterialDecorator(newCar, interiorMaterial);
 
-        if (heatedSeats == true)
+        if (heatedSeats)
         {
             newCar = new HeatedSeatsDecorator(newCar);
         }
-        if (touchScreen == true)
+        if (touchScreen)
         {
             newCar = new TouchScreenDecorator(newCar);
         }

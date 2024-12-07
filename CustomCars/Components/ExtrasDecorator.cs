@@ -10,7 +10,6 @@
             Description = GetDescription();
         }
 
-
         public override decimal GetCost()
         {
             return Car.GetCost() + 2500;
