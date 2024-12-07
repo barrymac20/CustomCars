@@ -11,7 +11,6 @@
         MPV,
         Estate
     }
-
     public abstract class Car
     {
         // Methods
