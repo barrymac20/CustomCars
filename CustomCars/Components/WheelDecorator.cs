@@ -2,14 +2,15 @@
 {
     public enum WheelSize
     {
-        SeventeenInch = 17,
-        NineteenInch = 19,
-        TwentyOneInch = 21
+        SeventeenInch = 0,
+        NineteenInch = 400,
+        TwentyOneInch = 800
     }
 
     public enum WheelType
     {
-        Steel, Alloy
+        Steel = 0,
+        Alloy = 2000
     }
     public class WheelSizeDecorator : CarDecorator
 
@@ -27,17 +28,33 @@
 
         public override decimal GetCost()
         {
-            if (WheelSize == WheelSize.NineteenInch)
-                return Car.GetCost() + 400;
-            else if (WheelSize == WheelSize.TwentyOneInch)
-                return Car.GetCost() + 800;
-            else
-                return Car.GetCost();
+            return Car.GetCost() + (Decimal)WheelSize;
+        }
+
+        public int GetWheelSize(WheelSize wheelSize)
+        {
+            int size;
+            switch (wheelSize)
+            {
+                case WheelSize.SeventeenInch:
+                    size = 17;
+                    break;
+                case WheelSize.NineteenInch:
+                    size = 19;
+                    break;
+                case WheelSize.TwentyOneInch:
+                    size = 21;
+                    break;
+                default:
+                    size = 17;
+                    break;
+            }
+            return size;
         }
 
         public override string GetDescription()
         {
-            return $"{Car.Description} with {(int)WheelSize}\"";
+            return $"{Car.Description} with {GetWheelSize(WheelSize)}\"";
         }
     }
 
@@ -57,15 +74,13 @@
 
         public override decimal GetCost()
         {
-            if (WheelType == WheelType.Alloy)
-                return Car.GetCost() + 1000;
-            else
-                return Car.GetCost();
+            return Car.GetCost() + (Decimal)WheelType;
+
         }
 
         public override string GetDescription()
         {
-            return $"{Car.Description} with {WheelType.ToString().ToLower()} wheels\"";
+            return $"{Car.Description} {WheelType.ToString().ToLower()} wheels";
         }
     }
 }

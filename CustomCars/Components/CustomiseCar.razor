@@ -35,12 +35,24 @@
 
 <br />
 <br />
-
+<!--
 <p><strong>Select wheel size</strong></p>
 <select name="WheelSizeOptions" @bind="wheelSize">
     @foreach (WheelSize wheelSize in Enum.GetValues(typeof(WheelSize)))
     {
         <option value="@wheelSize">@((int)wheelSize)"</option>
+    }
+</select>
+
+<br />
+<br />
+-->
+
+<p><strong>Select wheel size</strong></p>
+<select name="WheelSizeOptions" @bind="wheelSize">
+    @foreach (string wheelSize in Enum.GetNames(typeof(WheelSize)))
+    {
+        <option value="@wheelSize">@(wheelSize)</option>
     }
 </select>
 
