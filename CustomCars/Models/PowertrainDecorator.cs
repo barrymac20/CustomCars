@@ -14,7 +14,6 @@
         public PowertrainDecorator(Car car, Powertrain powertrain) : base(car)
         {
             Powertrain = powertrain;
-            Description = GetDescription();
         }
 
         public override decimal GetCost()
@@ -36,7 +35,7 @@
 
         public override string GetDescription()
         {
-            return $"{Car.Description} with {Powertrain.ToString().ToLower()}";
+            return $"{Car.GetDescription()} with {Powertrain.ToString().ToLower()} powertrain,";
         }
     }
 }

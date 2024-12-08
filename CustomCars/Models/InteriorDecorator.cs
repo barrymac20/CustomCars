@@ -23,7 +23,6 @@
         public InteriorColourDecorator(Car car, InteriorColour interiorColour) : base(car)
         {
             InteriorColour = interiorColour;
-            Description = GetDescription();
         }
 
         public static decimal GetInteriorColourCost(InteriorColour interiorColour)
@@ -45,7 +44,7 @@
 
         public override string GetDescription()
         {
-            return $"{Car.Description} with {InteriorColour.ToString().ToLower()}";
+            return $"{Car.GetDescription()} with {InteriorColour.ToString().ToLower()}";
         }
     }
 
@@ -56,7 +55,6 @@
         public InteriorMaterialDecorator(Car car, InteriorMaterial interiorMaterial) : base(car)
         {
             InteriorMaterial = interiorMaterial;
-            Description = GetDescription();
         }
 
         public static decimal GetInteriorMaterialCost(InteriorMaterial interiorMaterial)
@@ -77,11 +75,9 @@
 
         public override string GetDescription()
         {
-            return $"{Car.Description} {InteriorMaterial.ToString().ToLower()} interior";
+            return $"{Car.GetDescription()} {InteriorMaterial.ToString().ToLower()} interior";
         }
     }
-
-
 }
 
 

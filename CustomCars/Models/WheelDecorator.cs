@@ -60,7 +60,7 @@
 
         public override string GetDescription()
         {
-            return $"{Car.Description} with {GetWheelSize(WheelSize)}\"";
+            return $"{Car.GetDescription()} with {GetWheelSize(WheelSize)}\"";
         }
     }
 
@@ -91,7 +91,7 @@
 
         public override string GetDescription()
         {
-            return $"{Car.Description} {WheelType.ToString().ToLower()} wheels";
+            return $"{Car.GetDescription()} {WheelType.ToString().ToLower()} wheels,";
         }
     }
 }

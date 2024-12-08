@@ -19,7 +19,6 @@
         public CarTypeDecorator(Car car, CarType carType) : base(car)
         {
             CarType = carType;
-            Description = GetDescription();
         }
 
         public override decimal GetCost()
@@ -29,7 +28,7 @@
 
         public override string GetDescription()
         {
-            return $"{Car.Description} {CarType}";
+            return $"{Car.GetDescription()} {CarType}";
         }
     }
 }

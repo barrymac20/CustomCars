@@ -2,13 +2,11 @@
 {
     public class BaseCar : Car
     {
-        public BaseCar()
-        {
-            Description = GetDescription();
-        }
+        public BaseCar() { }
+
         public override string GetDescription()
         {
-            return $"Car configuration: ";
+            return Description;
         }
 
         public override decimal GetCost()

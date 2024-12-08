@@ -22,7 +22,6 @@
         public PaintColourDecorator(Car car, PaintColour paintColour) : base(car)
         {
             PaintColour = paintColour;
-            Description = GetDescription();
         }
 
         public override decimal GetCost()
@@ -44,7 +43,7 @@
 
         public override string GetDescription()
         {
-            return $"{Car.Description} with {PaintColour.ToString().ToLower()}";
+            return $"{Car.GetDescription()} with {PaintColour.ToString().ToLower()}";
         }
     }
 
@@ -55,7 +54,6 @@
         public PaintTypeDecorator(Car car, PaintFinish paintFinish) : base(car)
         {
             PaintFinish = paintFinish;
-            Description = GetDescription();
         }
 
         public static decimal GetPaintFinishCost(PaintFinish paintFinish)
@@ -75,7 +73,7 @@
 
         public override string GetDescription()
         {
-            return $"{Car.Description} {PaintFinish.ToString().ToLower()} paint";
+            return $"{Car.GetDescription()} {PaintFinish.ToString().ToLower()} paint,";
         }
     }
 

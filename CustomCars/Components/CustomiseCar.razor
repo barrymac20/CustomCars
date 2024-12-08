@@ -7,20 +7,23 @@
     <!-- Base Car Type -->
     <div class="card">
         <h5>🚗 Choose Your Base Car</h5>
-        <select name="carTypeOptions" @bind="carType">
-            @foreach (string car in Enum.GetNames(typeof(CarType)))
-            {
-                <option value="@car">@car</option>
-            }
-        </select>
+        <div>
+            <label class="label">Car Type</label>
+            <select name="carTypeOptions" @bind="carType" class="modern-select">
+                @foreach (string car in Enum.GetNames(typeof(CarType)))
+                {
+                    <option value="@car">@car</option>
+                }
+            </select>
+        </div>
     </div>
 
     <!-- Powertrain Options -->
     <div class="card">
         <h5>⚙️ Powertrain Options</h5>
         <div>
-            <label>Powertrain</label>
-            <select name="powertrainOptions" @bind="powertrain">
+            <label class ="label">Powertrain</label>
+            <select name="powertrainOptions" @bind="powertrain" class="modern-select">
                 @foreach (string powertrain in Enum.GetNames(typeof(Powertrain)))
                 {
                     <option value="@powertrain">@powertrain</option>
@@ -33,8 +36,8 @@
     <div class="card">
         <h5>🎨 Paint Options</h5>
         <div>
-            <label>Colour</label>
-            <select name="paintColourOptions" @bind="paintColour">
+            <label class="label">Colour</label>
+            <select name="paintColourOptions" @bind="paintColour" class="modern-select">
                 @foreach (string paintColour in Enum.GetNames(typeof(PaintColour)))
                 {
                     <option value="@paintColour">@paintColour</option>
@@ -42,8 +45,8 @@
             </select>
         </div>
         <div>
-            <label>Finish</label>
-            <select name="paintFinishOptions" @bind="paintFinish">
+            <label class="label">Finish</label>
+            <select name="paintFinishOptions" @bind="paintFinish" class="modern-select">
                 @foreach (string paintFinish in Enum.GetNames(typeof(PaintFinish)))
                 {
                     <option value="@paintFinish">@paintFinish</option>
@@ -56,8 +59,8 @@
     <div class="card">
         <h5>🛞 Wheel Options</h5>
         <div>
-            <label>Size</label>
-            <select name="wheelSizeOptions" @bind="wheelSize">
+            <label class="label">Size</label>
+            <select name="wheelSizeOptions" @bind="wheelSize" class="modern-select">
                 @foreach (string wheelSize in Enum.GetNames(typeof(WheelSize)))
                 {
                     <option value="@wheelSize">@wheelSize</option>
@@ -65,8 +68,8 @@
             </select>
         </div>
         <div>
-            <label>Type</label>
-            <select name="wheelTypeOptions" @bind="wheelType">
+            <label class="label">Type</label>
+            <select name="wheelTypeOptions" @bind="wheelType" class="modern-select">
                 @foreach (string wheelType in Enum.GetNames(typeof(WheelType)))
                 {
                     <option value="@wheelType">@wheelType</option>
@@ -79,8 +82,8 @@
     <div class="card">
         <h5>🪑 Interior Options</h5>
         <div>
-            <label>Colour</label>
-            <select name="interiorColourOptions" @bind="interiorColour">
+            <label class="label">Colour</label>
+            <select name="interiorColourOptions" @bind="interiorColour" class="modern-select">
                 @foreach (string interiorColour in Enum.GetNames(typeof(InteriorColour)))
                 {
                     <option value="@interiorColour">@interiorColour</option>
@@ -88,8 +91,8 @@
             </select>
         </div>
         <div>
-            <label>Material</label>
-            <select name="interiorMaterialOptions" @bind="interiorMaterial">
+            <label class="label">Material</label>
+            <select name="interiorMaterialOptions" @bind="interiorMaterial" class="modern-select">
                 @foreach (string interiorMaterial in Enum.GetNames(typeof(InteriorMaterial)))
                 {
                     <option value="@interiorMaterial">@interiorMaterial</option>
@@ -149,6 +152,24 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         text-align: center;
     }
+
+    .label {
+        font-weight: 500;
+        margin-bottom: 5px;
+        display: block;
+        color: #555;
+    }
+
+    .modern-select {
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        outline: none;
+        transition: border-color 0.3s;
+    }
+
 </style>
 
 @code {
@@ -192,6 +213,6 @@
             newCar = new TouchScreenDecorator(newCar);
         }
 
-        carDetails = $"{newCar.Description}. \nCost: €{newCar.GetCost()}";
+        carDetails = $"{newCar.GetDescription()}. \nCost: €{newCar.GetCost()}";
     }
 }
