@@ -1,5 +1,6 @@
 ﻿namespace CustomCars.Models
 {
+    // Enumerators
     // Using enum value to define cost as each one is unique
     public enum CarType
     {
@@ -15,12 +16,16 @@
 
     public class CarTypeDecorator : CarDecorator
     {
+        // Auto properties
         public CarType CarType { get; set; }
+
+        // Constructors
         public CarTypeDecorator(Car car, CarType carType) : base(car)
         {
             CarType = carType;
         }
 
+        // Override methods
         public override decimal GetCost()
         {
             return Car.GetCost() + (decimal)CarType;

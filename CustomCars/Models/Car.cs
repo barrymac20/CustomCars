@@ -2,11 +2,11 @@
 {
     public abstract class Car
     {
-        // Properties
+        // Auto properties
         public string Description { get; set; } = "Car configuration: ";
 
         // Methods
-        public abstract string GetDescription(); 
+        public abstract string GetDescription();
         public abstract decimal GetCost();
     }
 }

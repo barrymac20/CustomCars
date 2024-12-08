@@ -1,5 +1,6 @@
 ﻿namespace CustomCars.Models
 {
+    // Enumerators
     public enum PaintColour
     {
         Red,
@@ -16,19 +17,16 @@
 
     public class PaintColourDecorator : CarDecorator
     {
-
+        // Auto properties
         public PaintColour PaintColour { get; set; }
 
+        // Constructors
         public PaintColourDecorator(Car car, PaintColour paintColour) : base(car)
         {
             PaintColour = paintColour;
         }
 
-        public override decimal GetCost()
-        {
-            return Car.GetCost() + GetPaintColourCost(PaintColour);
-        }
-
+        // Methods
         public static decimal GetPaintColourCost(PaintColour paintColour)
         {
             return paintColour switch
@@ -41,6 +39,12 @@
             };
         }
 
+        // Override methods
+        public override decimal GetCost()
+        {
+            return Car.GetCost() + GetPaintColourCost(PaintColour);
+        }
+
         public override string GetDescription()
         {
             return $"{Car.GetDescription()} with {PaintColour.ToString().ToLower()}";
@@ -49,13 +53,16 @@
 
     public class PaintTypeDecorator : CarDecorator
     {
+        // Auto properties
         public PaintFinish PaintFinish { get; set; }
 
+        // Constructors
         public PaintTypeDecorator(Car car, PaintFinish paintFinish) : base(car)
         {
             PaintFinish = paintFinish;
         }
 
+        // Methods
         public static decimal GetPaintFinishCost(PaintFinish paintFinish)
         {
             return paintFinish switch
@@ -66,6 +73,7 @@
             };
         }
 
+        // Override methods
         public override decimal GetCost()
         {
             return Car.GetCost() + GetPaintFinishCost(PaintFinish);
@@ -76,8 +84,4 @@
             return $"{Car.GetDescription()} {PaintFinish.ToString().ToLower()} paint,";
         }
     }
-
-
 }
-
-

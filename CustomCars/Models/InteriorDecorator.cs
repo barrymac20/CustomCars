@@ -1,5 +1,6 @@
 ﻿namespace CustomCars.Models
 {
+    //Enumerators
     public enum InteriorColour
     {
         Black,
@@ -18,13 +19,16 @@
 
     public class InteriorColourDecorator : CarDecorator
     {
+        // Auto properties
         public InteriorColour InteriorColour { get; set; }
 
+        // Constructors
         public InteriorColourDecorator(Car car, InteriorColour interiorColour) : base(car)
         {
             InteriorColour = interiorColour;
         }
 
+        // Methods
         public static decimal GetInteriorColourCost(InteriorColour interiorColour)
         {
             return interiorColour switch
@@ -37,6 +41,7 @@
             };
         }
 
+        // Override methods
         public override decimal GetCost()
         {
             return Car.GetCost() + GetInteriorColourCost(InteriorColour);
@@ -50,13 +55,16 @@
 
     public class InteriorMaterialDecorator : CarDecorator
     {
+        // Auto properties
         public InteriorMaterial InteriorMaterial { get; set; }
 
+        // Constructors
         public InteriorMaterialDecorator(Car car, InteriorMaterial interiorMaterial) : base(car)
         {
             InteriorMaterial = interiorMaterial;
         }
 
+        // Methods
         public static decimal GetInteriorMaterialCost(InteriorMaterial interiorMaterial)
         {
             return interiorMaterial switch
@@ -68,6 +76,8 @@
                 _ => 0
             };
         }
+
+        // Override methods
         public override decimal GetCost()
         {
             return Car.GetCost() + GetInteriorMaterialCost(InteriorMaterial);
@@ -79,5 +89,3 @@
         }
     }
 }
-
-

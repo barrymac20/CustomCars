@@ -1,0 +1,98 @@
+/* Container Grid - 3-column layout */
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Card Styles */
+.card, .preview-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0,0,0,.125)
+}
+
+/* Your Car Section */
+.preview-card {
+    grid-column: span 3;
+}
+
+/* General Styling */
+.label {
+    font-weight: 500;
+    margin-bottom: 5px;
+    display: block;
+    color: #555;
+}
+
+.modern-select {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+/* Flexbox for button and table */
+.table-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+/* Style the button */
+.update-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    .update-btn:hover {
+        background-color: #0056b3;
+    }
+
+    .update-btn.modified {
+        background-color: #ff0000; /* Red when modified */
+    }
+
+    .update-btn:hover.modified {
+        background-color: pink; /* Pink when modified */
+    }
+
+.hidden {
+    color: white;
+}
+
+/* Style the table */
+.config-table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 600px;
+    table-layout: fixed;
+}
+
+    .config-table th,
+    .config-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    .config-table th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+
+    .config-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }

@@ -10,6 +10,7 @@
         <h5>🚗 Choose Your Base Car</h5>
         <div>
             <label class="label">Car Type</label>
+            <!-- Dropdown for car type selection, dynamically populated with enumeration values -->
             <select name="carTypeOptions" @bind="carType" @bind:after="MarkAsModified" class="modern-select">
                 @foreach (string car in Enum.GetNames(typeof(CarType)))
                 {
@@ -24,6 +25,7 @@
         <h5>⚙️ Powertrain Options</h5>
         <div>
             <label class="label">Powertrain</label>
+            <!-- Dropdown for powertrain selection, dynamically populated with enumeration values -->
             <select name="powertrainOptions" @bind="powertrain" @bind:after="MarkAsModified" class="modern-select">
                 @foreach (string powertrain in Enum.GetNames(typeof(Powertrain)))
                 {
@@ -38,6 +40,7 @@
         <h5>🎨 Paint Options</h5>
         <div>
             <label class="label">Colour</label>
+            <!-- Dropdown for paint colour selection -->
             <select name="paintColourOptions" @bind="paintColour" @bind:after="MarkAsModified" class="modern-select">
                 @foreach (string paintColour in Enum.GetNames(typeof(PaintColour)))
                 {
@@ -47,6 +50,7 @@
         </div>
         <div>
             <label class="label">Finish</label>
+            <!-- Dropdown for paint finish selection -->
             <select name="paintFinishOptions" @bind="paintFinish" @bind:after="MarkAsModified" class="modern-select">
                 @foreach (string paintFinish in Enum.GetNames(typeof(PaintFinish)))
                 {
@@ -61,6 +65,7 @@
         <h5>🛞 Wheel Options</h5>
         <div>
             <label class="label">Size</label>
+            <!-- Dropdown for wheel size options, dynamically populated with enumeration values -->
             <select name="wheelSizeOptions" @bind="wheelSize" @bind:after="MarkAsModified" class="modern-select">
                 @foreach (WheelSize wheelSize in Enum.GetValues(typeof(WheelSize)))
                 {
@@ -70,6 +75,7 @@
         </div>
         <div>
             <label class="label">Type</label>
+            <!-- Dropdown for wheel type options -->
             <select name="wheelTypeOptions" @bind="wheelType" @bind:after="MarkAsModified" class="modern-select">
                 @foreach (string wheelType in Enum.GetNames(typeof(WheelType)))
                 {
@@ -84,6 +90,7 @@
         <h5>🪑 Interior Options</h5>
         <div>
             <label class="label">Colour</label>
+            <!-- Dropdown for selecting interior colour -->
             <select name="interiorColourOptions" @bind="interiorColour" @bind:after="MarkAsModified" class="modern-select">
                 @foreach (string interiorColour in Enum.GetNames(typeof(InteriorColour)))
                 {
@@ -93,6 +100,7 @@
         </div>
         <div>
             <label class="label">Material</label>
+            <!-- Dropdown for selecting interior material -->
             <select name="interiorMaterialOptions" @bind="interiorMaterial" @bind:after="MarkAsModified" class="modern-select">
                 @foreach (string interiorMaterial in Enum.GetNames(typeof(InteriorMaterial)))
                 {
@@ -107,10 +115,12 @@
         <h5>🌟 Extras</h5>
         <div>
             <label>Heated Seats</label>
+            <!-- Checkbox for selecting heated seats -->
             <input type="checkbox" @bind="heatedSeats" @bind:after="MarkAsModified" name="heatedSeats" />
         </div>
         <div>
             <label>Touch Screen</label>
+            <!-- Checkbox for selecting touch screen option -->
             <input type="checkbox" @bind="touchScreen" @bind:after="MarkAsModified" name="touchScreen" />
         </div>
         <br />
@@ -122,7 +132,9 @@
         <h5>🚘 Your Car</h5>
         <div class="table-container">
             <div style="width: 20%">
-            <button @onclick="UpdateConfiguration" class="update-btn @(isModified ? "modified" : "")">Update Configuration</button>
+                <!-- Button for applying configuration changes -->
+                <button @onclick="UpdateConfiguration" class="update-btn @(isModified ? "modified" : "")">Update Configuration</button>
+                <!-- Feedback message if modifications have been made -->
                 <p class="@(isModified ? "" : "hidden" )">Something has changed, please click "Update Configuration" to update your configuration</p>
             </div>
             <table style="width: 50%" class="config-table">
@@ -142,7 +154,8 @@
                     }
                 </tbody>
             </table>
-            <div  style="width: 30%">
+            <div style="width: 30%">
+                <!-- Summary display for the car details and image -->
                 <h5>Summary</h5>
                 <p>@carDetails</p>
                 <img src="@image" alt="Alternate Text" />
@@ -151,110 +164,8 @@
     </div>
 </div>
 
-<style>
-
-    /* Container Grid - 3-column layout */
-    .container {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-
-    /* Card Styles */
-    .card, .preview-card {
-        background: #ffffff;
-        border-radius: 12px;
-        padding: 20px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    /* Your Car Section */
-    .preview-card {
-        grid-column: span 3;
-    }
-
-    /* General Styling */
-    .label {
-        font-weight: 500;
-        margin-bottom: 5px;
-        display: block;
-        color: #555;
-    }
-
-    .modern-select {
-        width: 100%;
-        padding: 10px;
-        font-size: 1rem;
-        border-radius: 8px;
-        border: 1px solid #ddd;
-        outline: none;
-        transition: border-color 0.3s;
-    }
-
-    /* Flexbox for button and table */
-    .table-container {
-        display: flex;
-        align-items: flex-start;
-        gap: 10px;
-    }
-
-    /* Style the button */
-    .update-btn {
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-
-        .update-btn:hover {
-            background-color: #0056b3;
-        }
-
-        .update-btn.modified {
-            background-color: #ff0000; /* Red when modified */
-        }
-
-        .update-btn:hover.modified {
-            background-color: pink; /* Pink when modified */
-        }
-
-    .hidden {
-        color:white;
-    }
-
-
-    /* Style the table */
-    .config-table {
-        border-collapse: collapse;
-        width: 100%;
-        max-width: 600px;
-        table-layout: fixed;
-    }
-
-        .config-table th,
-        .config-table td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        .config-table th {
-            background-color: #f2f2f2;
-            font-weight: bold;
-        }
-
-        .config-table tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-</style>
-
 @code {
+    // Variables to store initialised and updated selections
     private CarType carType = CarType.Hatchback;
     private Powertrain powertrain = Powertrain.Petrol;
     private PaintColour paintColour = PaintColour.Red;
@@ -267,10 +178,9 @@
     private bool touchScreen = false;
     private bool isModified = false;
     private string? carDetails;
-    // private string? imageName = "hatchback";
     private string? image;
 
-    // List/Tuple to hold information for table display
+    // List to dynamically store car configuration options
     private List<(string feature, string value)> carConfiguration = new();
 
     // Method to show default configuration when page loads/initialises
@@ -279,7 +189,7 @@
         UpdateConfiguration();
     }
 
-    // If any inout changes it will change isModified to true to allow for dynamic change to button colour
+    // If any input changes it will change isModified to true to allow for dynamic change to button colour
     private void MarkAsModified()
     {
         isModified = true;
@@ -287,8 +197,8 @@
 
     private void UpdateConfiguration()
     {
+        // Logic to handle dynamic car configuration changes using Decorator pattern
         Car newCar = new BaseCar();
-
         newCar = new CarTypeDecorator(newCar, carType);
         newCar = new PowertrainDecorator(newCar, powertrain);
         newCar = new PaintColourDecorator(newCar, paintColour);
@@ -297,12 +207,10 @@
         newCar = new WheelTypeDecorator(newCar, wheelType);
         newCar = new InteriorColourDecorator(newCar, interiorColour);
         newCar = new InteriorMaterialDecorator(newCar, interiorMaterial);
-
         if (heatedSeats) newCar = new HeatedSeatsDecorator(newCar);
-
         if (touchScreen) newCar = new TouchScreenDecorator(newCar);
 
-        // Build the configuration list
+        // Update configuration details
         carConfiguration = new List<(string feature, string value)>
         {
             ("Car Type", carType.ToString()),
