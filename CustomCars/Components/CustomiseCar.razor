@@ -121,7 +121,10 @@
     <div class="preview-card">
         <h5>🚘 Your Car</h5>
         <div class="table-container">
+            <div>
             <button @onclick="UpdateConfiguration" class="update-btn @(isModified ? "modified" : "")">Update Configuration</button>
+                <p class="@(isModified ? "" : "hidden" )">Something has changed, please click "Update Configuration" to update your configuration</p>
+            </div>
             <table class="config-table">
                 <thead>
                     <tr>
@@ -218,6 +221,10 @@
         .update-btn:hover.modified {
             background-color: pink; /* Pink when modified */
         }
+
+    .hidden {
+        color:white;
+    }
 
 
     /* Style the table */
