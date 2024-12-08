@@ -142,6 +142,7 @@
                     <tr>
                         <th>Feature</th>
                         <th>Selected</th>
+                        <th>Cost Adder <br /><span style="font-size:smaller">(to €10000 base)</span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -150,6 +151,7 @@
                         <tr>
                             <td>@item.feature</td>
                             <td>@item.value</td>
+                            <td>€@item.cost</td>
                         </tr>
                     }
                 </tbody>
@@ -181,7 +183,7 @@
     private string? image;
 
     // List to dynamically store car configuration options
-    private List<(string feature, string value)> carConfiguration = new();
+    private List<(string feature, string value, decimal cost)> carConfiguration = new();
 
     // Method to show default configuration when page loads/initialises
     protected override void OnInitialized()
@@ -211,19 +213,19 @@
         if (touchScreen) newCar = new TouchScreenDecorator(newCar);
 
         // Update configuration details
-        carConfiguration = new List<(string feature, string value)>
+        carConfiguration = new List<(string feature, string value, decimal cost)>
         {
-            ("Car Type", carType.ToString()),
-            ("Powertrain", powertrain.ToString()),
-            ("Paint Colour", paintColour.ToString()),
-            ("Paint Finish", paintFinish.ToString()),
-            ("Wheel Size", $"{(int)wheelSize} inches"),
-            ("Wheel Type", wheelType.ToString()),
-            ("Interior Colour", interiorColour.ToString()),
-            ("Interior Material", interiorMaterial.ToString()),
-            ("Heated Seats", heatedSeats ? "Yes" : "No"),
-            ("Touch Screen", touchScreen ? "Yes" : "No"),
-            ("Total Cost", $"€{newCar.GetCost():N2}")
+            ("Car Type", carType.ToString(), (decimal)carType),
+            ("Powertrain", powertrain.ToString(), PowertrainDecorator.GetPowertrainCost(powertrain)),
+            ("Paint Colour", paintColour.ToString(), PaintColourDecorator.GetPaintColourCost(paintColour)),
+            ("Paint Finish", paintFinish.ToString(), PaintFinishDecorator.GetPaintFinishCost(paintFinish)),
+            ("Wheel Size", $"{(int)wheelSize} inches", WheelSizeDecorator.GetWheelSizeCost(wheelSize)),
+            ("Wheel Type", wheelType.ToString(), WheelTypeDecorator.GetWheelTypeCost(wheelType)),
+            ("Interior Colour", interiorColour.ToString(), InteriorColourDecorator.GetInteriorColourCost(interiorColour)),
+            ("Interior Material", interiorMaterial.ToString(), InteriorMaterialDecorator.GetInteriorMaterialCost(interiorMaterial)),
+            ("Heated Seats", heatedSeats ? "Yes" : "No", heatedSeats ? 2500 : 0),
+            ("Touch Screen", touchScreen ? "Yes" : "No", touchScreen ? 1500 : 0),
+            ("Total Cost", "-", newCar.GetCost())
         };
 
         carDetails = $"{newCar.GetDescription()}. \nCost: €{newCar.GetCost()}";
