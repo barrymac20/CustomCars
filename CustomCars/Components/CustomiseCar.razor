@@ -10,7 +10,7 @@
         <h5>🚗 Choose Your Base Car</h5>
         <div>
             <label class="label">Car Type</label>
-            <select name="carTypeOptions" @bind="carType" class="modern-select">
+            <select name="carTypeOptions" @bind="carType" @bind:after="MarkAsModified" class="modern-select">
                 @foreach (string car in Enum.GetNames(typeof(CarType)))
                 {
                     <option value="@car">@car</option>
@@ -24,7 +24,7 @@
         <h5>⚙️ Powertrain Options</h5>
         <div>
             <label class="label">Powertrain</label>
-            <select name="powertrainOptions" @bind="powertrain" class="modern-select">
+            <select name="powertrainOptions" @bind="powertrain" @bind:after="MarkAsModified" class="modern-select">
                 @foreach (string powertrain in Enum.GetNames(typeof(Powertrain)))
                 {
                     <option value="@powertrain">@powertrain</option>
@@ -38,7 +38,7 @@
         <h5>🎨 Paint Options</h5>
         <div>
             <label class="label">Colour</label>
-            <select name="paintColourOptions" @bind="paintColour" class="modern-select">
+            <select name="paintColourOptions" @bind="paintColour" @bind:after="MarkAsModified" class="modern-select">
                 @foreach (string paintColour in Enum.GetNames(typeof(PaintColour)))
                 {
                     <option value="@paintColour">@paintColour</option>
@@ -47,7 +47,7 @@
         </div>
         <div>
             <label class="label">Finish</label>
-            <select name="paintFinishOptions" @bind="paintFinish" class="modern-select">
+            <select name="paintFinishOptions" @bind="paintFinish" @bind:after="MarkAsModified" class="modern-select">
                 @foreach (string paintFinish in Enum.GetNames(typeof(PaintFinish)))
                 {
                     <option value="@paintFinish">@paintFinish</option>
@@ -61,7 +61,7 @@
         <h5>🛞 Wheel Options</h5>
         <div>
             <label class="label">Size</label>
-            <select name="wheelSizeOptions" @bind="wheelSize" class="modern-select">
+            <select name="wheelSizeOptions" @bind="wheelSize" @bind:after="MarkAsModified" class="modern-select">
                 @foreach (WheelSize wheelSize in Enum.GetValues(typeof(WheelSize)))
                 {
                     <option value="@wheelSize">@((int)wheelSize) inches</option>
@@ -70,7 +70,7 @@
         </div>
         <div>
             <label class="label">Type</label>
-            <select name="wheelTypeOptions" @bind="wheelType" class="modern-select">
+            <select name="wheelTypeOptions" @bind="wheelType" @bind:after="MarkAsModified" class="modern-select">
                 @foreach (string wheelType in Enum.GetNames(typeof(WheelType)))
                 {
                     <option value="@wheelType">@wheelType</option>
@@ -84,7 +84,7 @@
         <h5>🪑 Interior Options</h5>
         <div>
             <label class="label">Colour</label>
-            <select name="interiorColourOptions" @bind="interiorColour" class="modern-select">
+            <select name="interiorColourOptions" @bind="interiorColour" @bind:after="MarkAsModified" class="modern-select">
                 @foreach (string interiorColour in Enum.GetNames(typeof(InteriorColour)))
                 {
                     <option value="@interiorColour">@interiorColour</option>
@@ -93,7 +93,7 @@
         </div>
         <div>
             <label class="label">Material</label>
-            <select name="interiorMaterialOptions" @bind="interiorMaterial" class="modern-select">
+            <select name="interiorMaterialOptions" @bind="interiorMaterial" @bind:after="MarkAsModified" class="modern-select">
                 @foreach (string interiorMaterial in Enum.GetNames(typeof(InteriorMaterial)))
                 {
                     <option value="@interiorMaterial">@interiorMaterial</option>
@@ -107,11 +107,11 @@
         <h5>🌟 Extras</h5>
         <div>
             <label>Heated Seats</label>
-            <input type="checkbox" @bind="heatedSeats" name="heatedSeats" />
+            <input type="checkbox" @bind="heatedSeats" @bind:after="MarkAsModified" name="heatedSeats" />
         </div>
         <div>
             <label>Touch Screen</label>
-            <input type="checkbox" @bind="touchScreen" name="touchScreen" />
+            <input type="checkbox" @bind="touchScreen" @bind:after="MarkAsModified" name="touchScreen" />
         </div>
         <br />
         <br />
@@ -121,7 +121,7 @@
     <div class="preview-card">
         <h5>🚘 Your Car</h5>
         <div class="table-container">
-            <button @onclick="UpdateConfiguration" class="update-btn">Update Configuration</button>
+            <button @onclick="UpdateConfiguration" class="update-btn @(isModified ? "modified" : "")">Update Configuration</button>
             <table class="config-table">
                 <thead>
                     <tr>
@@ -211,6 +211,15 @@
             background-color: #0056b3;
         }
 
+        .update-btn.modified {
+            background-color: #ff0000; /* Red when modified */
+        }
+
+        .update-btn:hover.modified {
+            background-color: pink; /* Pink when modified */
+        }
+
+
     /* Style the table */
     .config-table {
         border-collapse: collapse;
@@ -247,15 +256,22 @@
     private InteriorMaterial interiorMaterial = InteriorMaterial.Cloth;
     private bool heatedSeats = false;
     private bool touchScreen = false;
-
+    private bool isModified = false;
     private string? carDetails;
 
     // List/Tuple to hold information for table display
     private List<(string feature, string value)> carConfiguration = new();
 
+    // Method to show default configuration when page loads/initialises
     protected override void OnInitialized()
     {
-        UpdateConfiguration(); // Show configuration as soon as the page loads
+        UpdateConfiguration(); 
+    }
+
+    // If any inout changes it will change isModified to true to allow for dynamic change to button colour
+    private void MarkAsModified()
+    {
+        isModified = true;
     }
 
     private void UpdateConfiguration()
@@ -292,5 +308,7 @@
         };
 
         carDetails = $"{newCar.GetDescription()}. \nCost: €{newCar.GetCost()}";
+
+        isModified = false;
     }
 }
