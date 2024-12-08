@@ -1,4 +1,4 @@
-﻿namespace CustomCars.Components
+﻿namespace CustomCars.Models
 {
     public class HeatedSeatsDecorator : CarDecorator
     {

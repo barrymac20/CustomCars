@@ -1,4 +1,4 @@
-﻿namespace CustomCars.Components
+﻿namespace CustomCars.Models
 {
     public enum WheelSize
     {
@@ -68,7 +68,7 @@
     {
         public WheelType WheelType { get; set; }
 
-        public WheelTypeDecorator(Car car, WheelType wheelType): base(car)
+        public WheelTypeDecorator(Car car, WheelType wheelType) : base(car)
         {
             WheelType = wheelType;
         }

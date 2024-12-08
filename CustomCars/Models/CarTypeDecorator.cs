@@ -1,4 +1,4 @@
-﻿namespace CustomCars.Components
+﻿namespace CustomCars.Models
 {
     // Using enum value to define cost as each one is unique
     public enum CarType
