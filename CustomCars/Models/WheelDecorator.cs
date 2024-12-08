@@ -2,9 +2,9 @@
 {
     public enum WheelSize
     {
-        SeventeenInch,
-        NineteenInch,
-        TwentyOneInch
+        SeventeenInch = 17,
+        NineteenInch = 19,
+        TwentyOneInch = 21
     }
 
     public enum WheelType

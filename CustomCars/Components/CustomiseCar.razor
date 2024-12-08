@@ -62,9 +62,9 @@
         <div>
             <label class="label">Size</label>
             <select name="wheelSizeOptions" @bind="wheelSize" class="modern-select">
-                @foreach (string wheelSize in Enum.GetNames(typeof(WheelSize)))
+                @foreach (WheelSize wheelSize in Enum.GetValues(typeof(WheelSize)))
                 {
-                    <option value="@wheelSize">@wheelSize</option>
+                    <option value="@wheelSize">@((int)wheelSize) inches</option>
                 }
             </select>
         </div>
@@ -192,7 +192,7 @@
     /* Flexbox for button and table */
     .table-container {
         display: flex;
-        align-items: flex-start; 
+        align-items: flex-start;
         gap: 10px;
     }
 
@@ -282,7 +282,7 @@
             ("Powertrain", powertrain.ToString()),
             ("Paint Colour", paintColour.ToString()),
             ("Paint Finish", paintFinish.ToString()),
-            ("Wheel Size", wheelSize.ToString()),
+            ("Wheel Size", $"{(int)wheelSize} inches"),
             ("Wheel Type", wheelType.ToString()),
             ("Interior Colour", interiorColour.ToString()),
             ("Interior Material", interiorMaterial.ToString()),
