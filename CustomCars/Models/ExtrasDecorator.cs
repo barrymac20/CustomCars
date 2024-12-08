@@ -13,7 +13,7 @@
 
         public override string GetDescription()
         {
-            return $"{Car.Description} with heated seats";
+            return $"{Car.GetDescription()} with heated seats";
         }
     }
 
@@ -30,7 +30,7 @@
 
         public override string GetDescription()
         {
-            return $"{Car.Description}, touch screen controls";
+            return $"{Car.GetDescription()}, with touch screen controls.";
         }
     }
 }

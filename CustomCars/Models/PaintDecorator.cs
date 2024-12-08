@@ -51,13 +51,13 @@
         }
     }
 
-    public class PaintTypeDecorator : CarDecorator
+    public class PaintFinishDecorator : CarDecorator
     {
         // Auto properties
         public PaintFinish PaintFinish { get; set; }
 
         // Constructors
-        public PaintTypeDecorator(Car car, PaintFinish paintFinish) : base(car)
+        public PaintFinishDecorator(Car car, PaintFinish paintFinish) : base(car)
         {
             PaintFinish = paintFinish;
         }
