@@ -10,7 +10,7 @@
         SUV = 30000,
         MPV = 35000,
         Pickup = 40000,
-        Convertible = 45000
+        Van = 45000
     }
 
     public class CarTypeDecorator : CarDecorator

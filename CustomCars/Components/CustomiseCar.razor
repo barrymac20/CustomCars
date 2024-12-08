@@ -121,15 +121,15 @@
     <div class="preview-card">
         <h5>🚘 Your Car</h5>
         <div class="table-container">
-            <div>
+            <div style="width: 20%">
             <button @onclick="UpdateConfiguration" class="update-btn @(isModified ? "modified" : "")">Update Configuration</button>
                 <p class="@(isModified ? "" : "hidden" )">Something has changed, please click "Update Configuration" to update your configuration</p>
             </div>
-            <table class="config-table">
+            <table style="width: 50%" class="config-table">
                 <thead>
                     <tr>
                         <th>Feature</th>
-                        <th>Value</th>
+                        <th>Selected</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -142,9 +142,10 @@
                     }
                 </tbody>
             </table>
-            <div>
+            <div  style="width: 30%">
                 <h5>Summary</h5>
                 <p>@carDetails</p>
+                <img src="@image" alt="Alternate Text" />
             </div>
         </div>
     </div>
@@ -232,6 +233,7 @@
         border-collapse: collapse;
         width: 100%;
         max-width: 600px;
+        table-layout: fixed;
     }
 
         .config-table th,
@@ -265,6 +267,8 @@
     private bool touchScreen = false;
     private bool isModified = false;
     private string? carDetails;
+    // private string? imageName = "hatchback";
+    private string? image;
 
     // List/Tuple to hold information for table display
     private List<(string feature, string value)> carConfiguration = new();
@@ -272,7 +276,7 @@
     // Method to show default configuration when page loads/initialises
     protected override void OnInitialized()
     {
-        UpdateConfiguration(); 
+        UpdateConfiguration();
     }
 
     // If any inout changes it will change isModified to true to allow for dynamic change to button colour
@@ -315,6 +319,8 @@
         };
 
         carDetails = $"{newCar.GetDescription()}. \nCost: €{newCar.GetCost()}";
+
+        image = $"/images/{carType}.jpg";
 
         isModified = false;
     }
